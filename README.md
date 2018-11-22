@@ -2,6 +2,8 @@
 
 Math is Fun! is the variation/continuation/spiritual successor of [game.py](https://github.com/ae-dschorsaanjo/game.py) written in Free Pascal.
 
+Tested on Windows 10 and Xubuntu 18.10, it should work on virtually anything.
+
 # How to ~~use~~ play?
 
 It is easy! Just run the executable (after compiling, if necessary) and you can do the settings in-game along
