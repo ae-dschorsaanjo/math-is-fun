@@ -12,6 +12,14 @@ The game only needs Free Pascal (3.0+). It should compile without any further de
 
 Here's a sample command for compiling on Windows: `fpc mathisfun.pas -obuild/mathisfun.exe & delp build`
 
+# Future plans
+
+- Fix statistics horizontals formatting as shown in terminal.
+- Refactor code:
+    - Write/rewrite comments,
+    - Review code and make it more readable if needed.
+- Enforce proper terminal/command line sizing.
+
 # Copyright
 
 This project's used the Modified BSD License (a.k.a. 3-clause BSD License).
