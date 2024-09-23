@@ -1,18 +1,16 @@
 # Math is Fun!
 
-Math is Fun! is the variation/continuation/spiritual successor of [game.py](https://github.com/ae-dschorsaanjo/game.py) written in Free Pascal.
+Math is Fun! is the spiritual successor of [game.py](https://github.com/ae-dschorsaanjo/game.py) written in Free Pascal.
 
-Tested on Windows 10 and Xubuntu 18.10, it should work on virtually anything.
+# How to play?
 
-# How to ~~use~~ play?
-
-It is easy! Just run the executable (after compiling, if necessary) and you can do the settings in-game along
-with the descriptions of the settings. You may also find the "help" useful.
+The game expects a terminal/command line with a size of at least 80x24 characters. After starting the program, it is recommended to run through the help menu and adjust the settings before playing.
 
 # How to compile?
 
-You will not need anything but FPC (version 3 or later). You can compile it by
-simply use `fpc mathisfun.pas`.
+The game only needs Free Pascal (3.0+). It should compile without any further dependencies.
+
+Here's a sample command for compiling on Windows: `fpc mathisfun.pas -obuild/mathisfun.exe & delp build`
 
 # Copyright
 
