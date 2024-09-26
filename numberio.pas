@@ -79,13 +79,13 @@ const
     { Name of the program }
     PROGRAM_NAME = 'Math is Fun!';
     { Version number of the program }
-    PROGRAM_VERSION = 'v0.1';
+    PROGRAM_VERSION = 'v0.2a';
     { Developer (or developers) of the program }
-    PROGRAM_DEVELOPER = 'B. Zolta''n Gorza';
+    PROGRAM_DEVELOPER = 'ae-dschorsaanjo';
     { Contact info of the developer(s) }
     PROGRAM_DEV_CONTACT = '(b.zoltan.gorza@gmail.com)';
     { The year in which the program was worked on }
-    PROGRAM_DATE = '2018';
+    PROGRAM_DATE = '2024';
     { Header's first line }
     TEXT_HEADER: String = '';
     //TEXT_HEADER = 'Math Is Fun v0.1 by B. Zolta''n Gorza (2018)';
@@ -160,7 +160,7 @@ procedure readBool(var b: Boolean;
 function expressionToString(const e: TExpression;
                             const longOp: Boolean = False;
                             const width: Byte = 0;
-                            const idxFmt: String = '%d: '): String; inline;
+                            const idxFmt: String = '%d: '): String;
 
 { @link(TExpression Expression) writer procedure.
   @seealso(expressionToString)
@@ -173,16 +173,16 @@ procedure expressionWriter(const e: TExpression;
                            const longOp: Boolean = False;
                            const width: Byte = 0;
                            const idxFmt: String = '%d: ';
-                           const checkFirstTime: Boolean = True); inline;
+                           const checkFirstTime: Boolean = True);
 
 { Set ups the default colors.
   @seealso(DEF_FCOLOR)
   @seealso(DEF_BCOLOR)
   @param(invert Invert the default colors (default: @false)) }
-procedure useDefaultColors(const invert: Boolean = False); inline;
+procedure useDefaultColors(const invert: Boolean = False);
 
 { Restores the game area and clears it. }
-procedure restoreGameArea; inline;
+procedure restoreGameArea;
 
 { Menu generator and writer procedure.
   @param(item The used/wanted menu items.)
@@ -287,7 +287,7 @@ var
     s: String; // temporarily store the current input
     x, ox: Byte; // the last position
     c: Char; // current input char
-procedure addChar(const ch: Char); inline;
+procedure addChar(const ch: Char);
     begin
     if length(s) < 15 then
         begin
@@ -373,7 +373,7 @@ var
     s: String; // temporarily store the current input
     x, ox: Byte; // the last position
     c: Char; // current input char
-procedure addChar(const ch: Char); inline;
+procedure addChar(const ch: Char);
     begin
     if length(s) < 10 then // avoiding overflow
         begin
@@ -464,7 +464,6 @@ var
     c: Char;
     x, y: Byte;
 begin
-
     if b then
         idx := 1
     else
@@ -537,7 +536,7 @@ begin
     // split the string by spaces, or max `len` long pieces
     for s in str do
     begin
-        if (s <> ' ') and (length(tmpS + s) <= len)  then
+        if (s <> ' ') and (length(tmpS + s) <= len) then
         begin
             if s = NEWLINECHAR then
                 begin
@@ -590,7 +589,7 @@ end;
 function expressionToString(const e: TExpression;
                             const longOp: Boolean = False;
                             const width: Byte = 0;
-                            const idxFmt: String = '%d: '): String; inline;
+                            const idxFmt: String = '%d: '): String;
 var
     s: TStringArray;
     c: Integer;
@@ -620,7 +619,7 @@ procedure expressionWriter(const e: TExpression;
                            const longOp: Boolean = False;
                            const width: Byte = 0;
                            const idxFmt: String = '%d: ';
-                           const checkFirstTime: Boolean = True); inline;
+                           const checkFirstTime: Boolean = True);
 var
     x, y: Byte;
 begin
@@ -637,7 +636,7 @@ begin
     end;
 end;
 
-procedure useDefaultColors(const invert: Boolean = False); inline;
+procedure useDefaultColors(const invert: Boolean = False);
 begin
     if invert then
         begin
@@ -651,7 +650,7 @@ begin
         end;
 end;
 
-procedure restoreGameArea; inline;
+procedure restoreGameArea;
 begin
     window(X_MIN, Y_MIN, X_MAX, Y_MAX);
     useDefaultColors;
@@ -740,20 +739,20 @@ var
     split: TStringArray;
     current_line: Integer;
     ch: Char;
-procedure writeLastLine; inline;
+procedure writeLastLine;
     begin
         window(X_MIN, Y_LAST_LINE, X_MAX, Y_LAST_LINE);
         useDefaultColors(True);
         clrscr;
         write(USER_HELP);
     end;
-procedure clearLastLine; inline;
+procedure clearLastLine;
     begin
         window(X_MIN, Y_LAST_LINE, X_MAX, Y_LAST_LINE);
         useDefaultColors;
         clrscr;
     end;
-procedure writePage; inline;
+procedure writePage;
     var
         c: Integer;
     begin
@@ -822,8 +821,14 @@ var
     tableRow: String;
     tableAdditional: String;
     w: String;
+    w2: String;
+function intLog(const n: Integer): Integer;
+    begin
+        intLog := trunc(log10(n)) + 1;
+    end;
 begin
-    w := intToStr(MAX_LEVEL); //intToStr(ifThen(nog > 0, nog, g.numberOfGames));
+    // w := intToStr(MAX_LEVEL);
+    w := intToStr(intLog(ifThen(nog > 0, nog, g.numberOfGames)));
     tableHead := '%:3s: %' + w + 's   %' + w + 's   %' + w + 's|';
     tableRow := '~%s: %' + w + 'd   %' + w + 'd   %' + w + 'd';
     tableAdditional := '   (%d%%)';
@@ -853,7 +858,7 @@ begin
     for o in TOp do
         stg += format('~%s: %d|', [OPERATIONS[ord(o)].nam, tmpOA[o]]);}
 
-    stg += '||Statistics by operation:|~';
+    stg += '|Statistics by operation:|~';
     tmpS := format(tableHead,
                    ['op', '#',
                     resultToString(correct), resultToString(incorrect)]);
@@ -892,8 +897,11 @@ begin
         end;
     end;
 
-    tableHead := '%-' + intToStr(g.level + ord(g.includeNegative)) + 'd';
-    tmpS := ': %' + w + 'd %s %' + w + 'd = %-5s   user: %-15s   %-15s   %s|';
+    // tableHead := '%-' + intToStr(g.level + ord(g.includeNegative)) + 'd';
+    tableHead := '%' + w + 'd';
+    w2 := intToStr(g.level + ord(g.includeNegative));
+    tmpS := ': %' + w2 + 'd %s %' + w2 + 'd = %-5s   user: %-12s   %-12s   %s|';
+    // tmpS := ': %' + w + 'd %s %' + w + 'd = %-5s   user: %-15s   %-15s   %s';
     stg += '||List of expressions (in order):|';
     for e in g.stats.expressions do
         stg += format(tableHead + tmpS,
@@ -903,10 +911,11 @@ begin
                        categoryToString(e.cat)]);
 
     stg += '||Thanks for playing ' + PROGRAM_NAME + ' (' + PROGRAM_VERSION
-         + ')! We wish the best for you, and if you have not been the best '
-         + 'player of all, then never forget: everything is gonna be better '
-         + '(at least that is what they told me).||'
-         + 'Generated at ' + formatDateTime('YYYY. MM. DD. hh:mm.', NOW);
+         + ')!'
+        //  + ' We wish the best for you, and if you have not been the best '
+        //  + 'player of all, then never forget: everything is gonna be better '
+        //  + '(at least that is what they told me).'
+         + '||Generated on ' + formatDateTime('YYYY. MM. DD. hh:mm.', NOW);
 
     statisticsTextGenerator := stg;
 end;
@@ -958,9 +967,9 @@ end;
 
 function randomTextHeader(): String;
 const
-    texts: Array[1..10] of String = (
-        '         Placeholder texts',
-        '   TODO: put texts *here*.',
+    texts: Array of String = (
+        '          Placeholder text',
+        '    TODO: put text *here*.',
         'Math is Fun! or is it not?',
         'Art thou a master of Math?',
         '    Pascal wasn''t my idea',
@@ -968,7 +977,11 @@ const
         '   Hello? Is anyone there?',
         '     Leibniz was cool too.',
         '                  HELP ME!',
-        '    a.k.a. Ae. Dschorsaanjo'
+        '  a.k.a. B. Zolta''n Gorza',
+        '               a.k.a. Zotn',
+        '          a.k.a. jan Sotan',
+        '       nanpa lawa li suli.',
+        '               14th option'
     );
 var
     r: Integer;

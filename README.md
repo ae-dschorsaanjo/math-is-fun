@@ -19,6 +19,7 @@ Here's a sample command for compiling on Windows: `fpc mathisfun.pas -obuild/mat
     - Write/rewrite comments,
     - Review code and make it more readable if needed.
 - Enforce proper terminal/command line sizing.
+- Increment version number up to v0.3 after code refactor and output text formatting are done. Use v0.2* versions until then.
 
 # Copyright
 

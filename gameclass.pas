@@ -43,9 +43,9 @@ type
         _incNeg: Boolean;
         _stats: TStatistics;
         _cg: Integer;
-        function _isFiniteGame: Boolean; inline;
-        function _finiteGame: Boolean; inline;
-        function _infiniteGame: Boolean; inline;
+        function _isFiniteGame: Boolean;
+        function _finiteGame: Boolean;
+        function _infiniteGame: Boolean;
     public
         { The number of currently played games. }
         property numberOfGames: Integer read _cg;
@@ -76,7 +76,7 @@ type
           This is used in the main loop, that is implemented in the
           program itself (hence the backend is independent from the
           @link(numberio frontend). }
-        function doContinue(const userInput: Double): Boolean; inline;
+        function doContinue(const userInput: Double): Boolean;
     end;
 
     TText = (normal, out);
@@ -309,17 +309,17 @@ begin
     _cg := 0;
 end;
 
-function TGame._isFiniteGame: Boolean; inline;
+function TGame._isFiniteGame: Boolean;
 begin
     _isFiniteGame := _nog > 0;
 end;
 
-function TGame._finiteGame: Boolean; inline;
+function TGame._finiteGame: Boolean;
 begin
     _finiteGame := _nog <= _cg;
 end;
 
-function TGame._infiniteGame: Boolean; inline;
+function TGame._infiniteGame: Boolean;
 begin
     _infiniteGame := _stats.lastExpression.isCorrect <> correct;
 end;
@@ -334,7 +334,7 @@ begin
     newTurn := e;
 end;
 
-function TGame.doContinue(const userInput: Double): Boolean; inline;
+function TGame.doContinue(const userInput: Double): Boolean;
 begin
     _stats.lastExpression.getUserInput(userInput);
 

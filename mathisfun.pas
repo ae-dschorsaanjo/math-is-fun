@@ -1,9 +1,6 @@
-(* Copyright 2018 B. Zoltán Gorza
- * 
- * This file is part of Math is Fun!, released under the Modified BSD License.
- *)
+{ Copyright 2018-2024 B. Zoltán Gorza
+  This file is part of Math is Fun!, released under the Modified BSD License. }
 
-{ Math is Fun! }
 program MathIsFun;
 
 {$mode objfpc}
@@ -20,12 +17,12 @@ uses
     NumberIO;
 
 var
-    { The settings used during gameplay. Stored globally for easy access. }
+    { Gameplay settigns. }
     settings: TSettings = (nog: 10; incNA: False; lvl: 2; incNeg: False);
-    { Additional setting for output. }
+    { Display setting, does not alter gameplay. }
     useLongOperationMarks: Boolean = False;
 
-{ The most important part, yet it'll be implemented last. }
+{ Starts a new game based on current settings. }
 procedure newGame;
 var
     game: TGame;
@@ -34,14 +31,12 @@ var
     fn: String;
     i: Integer;
 begin
-    // create new game
     game := TGame.create(settings.nog,
                          settings.incNA,
                          settings.lvl,
                          settings.incNeg);
 
-    // main loop (yes, these 7 lines and yes, it is working, and also yes,
-    //            most of it is really just formatting.)
+    // main loop
     repeat
         if settings.nog > 0 then
             i := round(log10(settings.nog)) + 1
@@ -63,7 +58,7 @@ begin
     if b then
     begin
         writeln('Please give a filename (with extension --');
-        write('    leave empty for default filename): ');
+        write(  '    leave empty for default filename): ');
         readln(fn);
         writeToFile(statisticsTextGenerator(game, settings.nog,
                                             useLongOperationMarks));
@@ -104,7 +99,7 @@ const
 var
     i, x, y: Byte;
     s: String;
-procedure writeLvl(const lvl: TLevel); inline;
+procedure writeLvl(const lvl: TLevel);
     const
         C: Array[1..5] of Byte = (GREEN, LIGHTGREEN, WHITE, LIGHTRED, RED);
     begin
@@ -264,7 +259,7 @@ begin
           + 'enough within the settings, so I will not describe them again '
           + 'here.|I will thell you though that which settings you should use'
           + ' to get such easy equasions as above:|'
-          + 'Include non arithmbetic...: False|Level: 1|Include negative: False'
+          + 'Include non arithmetic...: False|Level: 1|Include negative: False'
           + '.||'
           + 'Conclusion|'
           + '----------|'
@@ -299,7 +294,7 @@ end;
 // ---------------------------------- main ---------------------------------- //
 
 begin
-    theBeginning; // where everything begins
+    theBeginning;
     mainMenu;
 end.
 
